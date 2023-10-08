@@ -34,7 +34,9 @@ public:
 	
 	char* GetParentPath(char* _path);
 	
-
+	char* GetExtensionFromPath(char* _path);
+	char* GetExtensionFromFileName(char* _fileName);
+	
 private:
 	char* CreateCopy(char* _txt);
 	void TrimDelim(char* _path);

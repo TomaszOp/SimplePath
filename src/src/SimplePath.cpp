@@ -341,3 +341,55 @@ char* SimplePath::GetParentPath(char* _path)
 	return parent;
 }
 
+char* SimplePath::GetExtensionFromPath(char* _fileName)
+{
+	return GetExtensionFromPath(GetLast(_fileName));
+}
+
+char* SimplePath::GetExtensionFromFileName(char* _path)
+{
+	char* returnValue = NULL;
+	char* str = CreateCopy(_path);
+
+	if (_path == NULL || strlen(_path) == 1)
+	{
+		return NULL;
+	}
+
+	char* find = NULL;
+	char* last = NULL;
+
+	TrimDelim(str);
+
+	find = strchr(str, '.');
+	last = find;
+
+	while (find != NULL)
+	{
+		last = find;
+		find = strchr(find + 1, '.');
+	}
+
+	if (last != NULL)
+	{
+		if (strlen(last) == 1)
+		{
+			returnValue = (char*)malloc(sizeof(char) * 2);
+			returnValue[0] = 0;
+		}
+		else
+		{
+			returnValue = (char*)malloc(sizeof(char) * strlen(last) + 1);
+			strcpy(returnValue, last + 1);
+		}
+	}
+	else
+	{
+		return NULL;
+	}
+
+	free(str);
+
+	return returnValue;
+}
+
