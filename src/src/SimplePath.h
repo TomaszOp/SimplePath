@@ -4,30 +4,40 @@
 #include <cstring>
 #include <cstdlib>
 
-#define DefaultDelim "\\"
+#define DEF_DENIM '\\'
 
 class SimplePath
 {
 public:
 	SimplePath();
-	SimplePath(const char * _delim);
-	SimplePath(const char * _delim, char * _path);
+	SimplePath(char _delim);
+	SimplePath(char _delim, char * _path);
 	~SimplePath();
 
-	const char* delim;
+	char delim;
 
-	char * Path;
+	char* Path;
 	char** List;
 	int Length;
-
+	
+	
 	char* GetLast();
-	char* GetLast(const char* _path);
+	char* GetLast(char* _path);
 	char* GetRoot();
-	char* GetRoot(const char* _path);
-	void Split(const char* _path, char** &_array, int & _length);
+	char* GetRoot(char* _path);
+	
+	void Split(char* _path, char** &_array, int & _length);
+	
+	char* GetParent();
+	char* GetParent(char* _path);
+	char* GetParent(char* _path, int index);
+	
+	char* GetParentPath(char* _path);
+	
 
 private:
-	char* CreateCopy(const char* _txt);
+	char* CreateCopy(char* _txt);
+	void TrimDelim(char* _path);
 };
 
 #endif
